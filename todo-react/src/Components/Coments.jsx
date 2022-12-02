@@ -1,14 +1,20 @@
 import { Trash } from "phosphor-react";
 import styles from "./Coments.module.css";
 
-export function Coments(props) {
+export function Coments({id, content, onDelete }) {
   const handleDelete = () => {
-    props.onDelete(props.content);
+    onDelete(id);
   };
 
+  const handleCheck = () => {
+    console.log("tasskkk")
+  }
+
   return (
-    <div className={styles.boxList} key={props.id}>
-      <p>{props.content}</p>
+    <div className={styles.boxList}>
+      <input type="checkbox" title="Marcar Tarefa" onChange={handleCheck} />
+
+      <p>{content}</p>
       <button
         onClick={handleDelete}
         className={styles.buttonTrash}

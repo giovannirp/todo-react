@@ -1,17 +1,14 @@
 import { useState } from "react";
 import { Coments } from "./Coments";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 import { PlusCircle } from "phosphor-react";
-import Clipboard from '../assets/clipboard.png';
+import Clipboard from "../assets/clipboard.png";
 
 import styles from "./ListContent.module.css";
 
-import { notes } from "./notes.jsx";
-
 export function ListContent() {
-  const [newTasksComents, setNewTasksComents] = useState([
-    "javascript"
-  ]);
+  const [newTasksComents, setNewTasksComents] = useState([]);
+
   const [newTasksInput, setNewTasksInput] = useState("");
 
   const handleNewTasks = (event) => {
@@ -21,22 +18,29 @@ export function ListContent() {
 
   const handleCreateTasks = (event) => {
     event.preventDefault();
-    setNewTasksComents([...newTasksComents, newTasksInput]);
+
+    const objectContent = {id: uuidv4(), content: newTasksInput, isComplete: false}
+
+    setNewTasksComents([...newTasksComents, objectContent])
     setNewTasksInput("");
+
+    console.log(newTasksComents);
+    // setNewTasksComents([...newTasksComents, newTasksInput]);
   };
 
   const deleteComent = (toDelete) => {
     const commentsDeleteOne = newTasksComents.filter((comment) => {
-      return comment !== toDelete;
+      console.log(toDelete)
+      return comment.id !== toDelete;
     });
 
     setNewTasksComents(commentsDeleteOne);
   };
 
   const handleNewTaskvalid = (event) => {
-    event.target.setCustomValidity("Esse campo é obrigatório...")
-  }
-  
+    event.target.setCustomValidity("Esse campo é obrigatório...");
+  };
+
   const isTasksComments = newTasksInput.length === 0;
 
   return (
@@ -60,16 +64,21 @@ export function ListContent() {
       {newTasksComents.map((comment) => {
         return (
           <div>
-            <Coments key={uuidv4()} content={comment} onDelete={deleteComent} />
+            <Coments
+              key={comment.id}
+              id={comment.id}
+              content={comment.content}
+              onDelete={deleteComent}
+            />
           </div>
         );
       })}
       {newTasksComents.length === 0 && (
-        <div>
+        <div className={styles.contentMenssage}>
           <img src={Clipboard} title="Imagem Clipboard" />
           <p>
-            Você ainda não tem tarefas cadastradas <br />
-            Crie tarefas e organize seus itens a fazer 
+            <strong>Você ainda não tem tarefas cadastradas</strong> <br />
+            Crie tarefas e organize seus itens a fazer
           </p>
         </div>
       )}
