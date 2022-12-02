@@ -2,5 +2,50 @@
   max-width: 736px;
   margin: 0 auto;
   margin-top: 12px;
+  margin-top: -27px;
+  margin-bottom: 40px;
 }
 
+.addTasks {
+  display: flex;
+  margin-bottom: 60px;
+}
+
+.addTasks input[type=text]{
+  max-width: 638px;
+  height: 54px;
+  border-radius: 8px;
+  background: var(--gray-500);
+  width: 100%;
+  border: 0;
+  padding-left: 20px;
+  color: var(--white);
+}
+
+.addTasks button[type=submit] span {
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+.addTasks button[type=submit]{
+  margin-left: 10px;
+  width: 90px;
+  height: 54px;
+  background: var(--blue-dark);
+  border: 0;
+  border-radius: 8px;
+  color: var(--gray-200);
+  margin-right: 15px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 5px;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.addTasks button[type=submit]:disabled {
+  opacity: 0.8;
+  cursor: not-allowed;
+}
