@@ -23,14 +23,10 @@ export function ListContent() {
 
     setNewTasksComents([...newTasksComents, objectContent])
     setNewTasksInput("");
-
-    console.log(newTasksComents);
-    // setNewTasksComents([...newTasksComents, newTasksInput]);
   };
 
   const deleteComent = (toDelete) => {
     const commentsDeleteOne = newTasksComents.filter((comment) => {
-      console.log(toDelete)
       return comment.id !== toDelete;
     });
 
@@ -41,7 +37,20 @@ export function ListContent() {
     event.target.setCustomValidity("Esse campo é obrigatório...");
   };
 
+  const taksCheck = (event, id) => {
+    const taskNew = newTasksComents.map((task) => {
+      if(task.id === id) {
+        task.isComplete = event.target.checked;
+        return task;
+      }
+      return task;
+    })
+
+    setNewTasksComents(taskNew)
+  }
+
   const isTasksComments = newTasksInput.length === 0;
+  const lenghtTasks = newTasksComents.filter(task => task.isComplete == true).length
 
   return (
     <section className={styles.listContent}>
@@ -60,15 +69,20 @@ export function ListContent() {
           </button>
         </form>
       </div>
-      <p>Tarefas criadas {newTasksComents.length}</p>
+
+      <div className={styles.contentFeedTasks}>
+        <strong>Tarefas criadas <span>{newTasksComents.length}</span></strong>
+        <strong>Tarefas criadas <span>{lenghtTasks} de {newTasksComents.length}</span></strong>
+      </div>
+
       {newTasksComents.map((comment) => {
         return (
           <div>
             <Coments
-              key={comment.id}
               id={comment.id}
               content={comment.content}
               onDelete={deleteComent}
+              onTaksChecked={taksCheck}
             />
           </div>
         );

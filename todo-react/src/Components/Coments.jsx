@@ -1,13 +1,13 @@
 import { Trash } from "phosphor-react";
 import styles from "./Coments.module.css";
 
-export function Coments({id, content, onDelete }) {
+export function Coments({id, content, onDelete, onTaksChecked }) {
   const handleDelete = () => {
     onDelete(id);
   };
 
-  const handleCheck = () => {
-    console.log("tasskkk")
+  const handleCheck = (event) => {
+    onTaksChecked(event, id)
   }
 
   return (

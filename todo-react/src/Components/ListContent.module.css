@@ -68,3 +68,22 @@
   color: var(--gray-300);
   line-height: 22px;
 }
+
+.contentFeedTasks {
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.contentFeedTasks strong {
+  color: var(--blue);
+}
+
+.contentFeedTasks strong span {
+  background: #202020;
+  border-radius: 999px;
+  padding: 2px 8px;
+  color: var(--white);
+  font-weight: normal;
+  font-size: 14px;
+}
