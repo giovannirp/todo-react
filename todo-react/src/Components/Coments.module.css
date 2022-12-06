@@ -17,3 +17,8 @@
   background: transparent;
   cursor: pointer;
 }
+
+.boxList input[type="checkbox"]:checked + p {
+  color: var(--gray-300);
+  text-decoration: line-through;
+}

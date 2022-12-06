@@ -79,6 +79,10 @@
   color: var(--blue);
 }
 
+.contentFeedTasks strong:last-child {
+  color: var(--purple);
+}
+
 .contentFeedTasks strong span {
   background: #202020;
   border-radius: 999px;

@@ -50,7 +50,7 @@ export function ListContent() {
   }
 
   const isTasksComments = newTasksInput.length === 0;
-  const lenghtTasks = newTasksComents.filter(task => task.isComplete == true).length
+  const lenghtTasks = newTasksComents.filter((task) => task.isComplete == true).length;
 
   return (
     <section className={styles.listContent}>
@@ -72,7 +72,7 @@ export function ListContent() {
 
       <div className={styles.contentFeedTasks}>
         <strong>Tarefas criadas <span>{newTasksComents.length}</span></strong>
-        <strong>Tarefas criadas <span>{lenghtTasks} de {newTasksComents.length}</span></strong>
+        <strong>Concluídas <span>{lenghtTasks} de {newTasksComents.length}</span></strong>
       </div>
 
       {newTasksComents.map((comment) => {
