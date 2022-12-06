@@ -5,6 +5,7 @@ import { PlusCircle } from "phosphor-react";
 import Clipboard from "../assets/clipboard.png";
 
 import styles from "./ListContent.module.css";
+import { MessagemTarefas } from "./MessagemTarefas";
 
 export function ListContent() {
   const [newTasksComents, setNewTasksComents] = useState([]);
@@ -19,9 +20,13 @@ export function ListContent() {
   const handleCreateTasks = (event) => {
     event.preventDefault();
 
-    const objectContent = {id: uuidv4(), content: newTasksInput, isComplete: false}
+    const objectContent = {
+      id: uuidv4(),
+      content: newTasksInput,
+      isComplete: false,
+    };
 
-    setNewTasksComents([...newTasksComents, objectContent])
+    setNewTasksComents([...newTasksComents, objectContent]);
     setNewTasksInput("");
   };
 
@@ -39,18 +44,20 @@ export function ListContent() {
 
   const taksCheck = (event, id) => {
     const taskNew = newTasksComents.map((task) => {
-      if(task.id === id) {
+      if (task.id === id) {
         task.isComplete = event.target.checked;
         return task;
       }
       return task;
-    })
+    });
 
-    setNewTasksComents(taskNew)
-  }
+    setNewTasksComents(taskNew);
+  };
 
   const isTasksComments = newTasksInput.length === 0;
-  const lenghtTasks = newTasksComents.filter((task) => task.isComplete == true).length;
+  const lenghtTasks = newTasksComents.filter(
+    (task) => task.isComplete == true
+  ).length;
 
   return (
     <section className={styles.listContent}>
@@ -71,8 +78,15 @@ export function ListContent() {
       </div>
 
       <div className={styles.contentFeedTasks}>
-        <strong>Tarefas criadas <span>{newTasksComents.length}</span></strong>
-        <strong>Concluídas <span>{lenghtTasks} de {newTasksComents.length}</span></strong>
+        <strong>
+          Tarefas criadas <span>{newTasksComents.length}</span>
+        </strong>
+        <strong>
+          Concluídas{" "}
+          <span>
+            {lenghtTasks} de {newTasksComents.length}
+          </span>
+        </strong>
       </div>
 
       {newTasksComents.map((comment) => {
@@ -88,13 +102,11 @@ export function ListContent() {
         );
       })}
       {newTasksComents.length === 0 && (
-        <div className={styles.contentMenssage}>
-          <img src={Clipboard} title="Imagem Clipboard" />
-          <p>
-            <strong>Você ainda não tem tarefas cadastradas</strong> <br />
-            Crie tarefas e organize seus itens a fazer
-          </p>
-        </div>
+        <MessagemTarefas
+          image={Clipboard}
+          messagePrimary="Você ainda não tem tarefas cadastradas"
+          messageSecundary="Crie tarefas e organize seus itens a fazer"
+        />
       )}
     </section>
   );

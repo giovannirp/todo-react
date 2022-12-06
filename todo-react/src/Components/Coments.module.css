@@ -18,6 +18,12 @@
   cursor: pointer;
 }
 
+.boxList p {
+  width: 100%;
+  padding-left: 15px;
+  padding-top: 5px;
+}
+
 .boxList input[type="checkbox"]:checked + p {
   color: var(--gray-300);
   text-decoration: line-through;

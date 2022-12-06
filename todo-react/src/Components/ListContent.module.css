@@ -50,25 +50,6 @@
   cursor: not-allowed;
 }
 
-.contentMenssage {
-  border-top: 1px solid #626262;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.contentMenssage img {
-  margin-top: 50px;
-  margin-bottom: 15px;
-}
-
-.contentMenssage p {
-  color: var(--gray-300);
-  line-height: 22px;
-}
-
 .contentFeedTasks {
   margin-bottom: 15px;
   display: flex;
