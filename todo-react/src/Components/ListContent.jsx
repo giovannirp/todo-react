@@ -8,26 +8,38 @@ import styles from "./ListContent.module.css";
 import { MessagemTarefas } from "./MessagemTarefas";
 
 export function ListContent() {
+  
+  const initialForm = {
+    taskInput: ''
+  }
+
   const [newTasksComents, setNewTasksComents] = useState([]);
 
-  const [newTasksInput, setNewTasksInput] = useState("");
+  const [formState, setFormState] = useState(initialForm);
 
-  const handleNewTasks = (event) => {
-    event.target.setCustomValidity("");
-    setNewTasksInput(event.target.value);
-  };
+  const handleTasks = (event) => {
+    const target = event.currentTarget
+    const { value, name } = target;
+
+    target.setCustomValidity("")
+
+    setFormState({
+      ...formState,
+      [name]: value
+    })
+  }
 
   const handleCreateTasks = (event) => {
     event.preventDefault();
 
     const objectContent = {
       id: uuidv4(),
-      content: newTasksInput,
+      content: formState.taskInput,
       isComplete: false,
     };
 
     setNewTasksComents([...newTasksComents, objectContent]);
-    setNewTasksInput("");
+    formState.taskInput = ''
   };
 
   const deleteComent = (toDelete) => {
@@ -54,7 +66,7 @@ export function ListContent() {
     setNewTasksComents(taskNew);
   };
 
-  const isTasksComments = newTasksInput.length === 0;
+  const isTasksComments = formState.taskInput.length === 0;
   const lenghtTasks = newTasksComents.filter(
     (task) => task.isComplete == true
   ).length;
@@ -65,9 +77,10 @@ export function ListContent() {
         <form onSubmit={handleCreateTasks} className={styles.addTasks}>
           <input
             type="text"
-            value={newTasksInput}
+            name="taskInput"
+            value={formState.taskInput}
             placeholder="Adicione uma nova tarefa"
-            onChange={handleNewTasks}
+            onChange={handleTasks}
             onInvalid={handleNewTaskvalid}
             required
           />
