@@ -10,12 +10,14 @@ import { MessagemTarefas } from "./MessagemTarefas";
 export function ListContent() {
   
   const initialForm = {
-    taskInput: ''
+    taskInput: '',
+    filter: ''
   }
 
   const [newTasksComents, setNewTasksComents] = useState([]);
 
   const [formState, setFormState] = useState(initialForm);
+  const [filter, setFilter] = useState('');
 
   const handleTasks = (event) => {
     const target = event.currentTarget
@@ -66,6 +68,14 @@ export function ListContent() {
     setNewTasksComents(taskNew);
   };
 
+  const searchList = () => {
+    setFilter(filter)
+  }
+
+  console.log("mey array", newTasksComents)
+
+  const filterList = newTasksComents.filter(item => item.content.includes(formState.filter))
+
   const isTasksComments = formState.taskInput.length === 0;
   const lenghtTasks = newTasksComents.filter(
     (task) => task.isComplete == true
@@ -102,7 +112,14 @@ export function ListContent() {
         </strong>
       </div>
 
-      {newTasksComents.map((comment) => {
+      <input
+        type="text"
+        name="filter"
+        value={formState.filter}
+        onChange={handleTasks}
+      />
+
+      {filterList.map((comment) => {
         return (
           <div>
             <Coments
