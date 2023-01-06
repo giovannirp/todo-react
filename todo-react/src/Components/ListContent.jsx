@@ -8,28 +8,27 @@ import styles from "./ListContent.module.css";
 import { MessagemTarefas } from "./MessagemTarefas";
 
 export function ListContent() {
-  
   const initialForm = {
-    taskInput: '',
-    filter: ''
-  }
+    taskInput: "",
+    filter: "",
+  };
 
   const [newTasksComents, setNewTasksComents] = useState([]);
 
   const [formState, setFormState] = useState(initialForm);
-  const [filter, setFilter] = useState('');
+  const [control, setControl] = useState(false);
 
   const handleTasks = (event) => {
-    const target = event.currentTarget
+    const target = event.currentTarget;
     const { value, name } = target;
 
-    target.setCustomValidity("")
+    target.setCustomValidity("");
 
     setFormState({
       ...formState,
-      [name]: value
-    })
-  }
+      [name]: value,
+    });
+  };
 
   const handleCreateTasks = (event) => {
     event.preventDefault();
@@ -41,7 +40,7 @@ export function ListContent() {
     };
 
     setNewTasksComents([...newTasksComents, objectContent]);
-    formState.taskInput = ''
+    formState.taskInput = "";
   };
 
   const deleteComent = (toDelete) => {
@@ -68,13 +67,9 @@ export function ListContent() {
     setNewTasksComents(taskNew);
   };
 
-  const searchList = () => {
-    setFilter(filter)
-  }
-
-  console.log("mey array", newTasksComents)
-
-  const filterList = newTasksComents.filter(item => item.content.includes(formState.filter))
+  const filterList = newTasksComents.filter((item) =>
+    item.content.includes(formState.filter)
+  );
 
   const isTasksComments = formState.taskInput.length === 0;
   const lenghtTasks = newTasksComents.filter(
@@ -112,12 +107,18 @@ export function ListContent() {
         </strong>
       </div>
 
-      <input
-        type="text"
-        name="filter"
-        value={formState.filter}
-        onChange={handleTasks}
-      />
+      {newTasksComents.length !== 0 && (
+        <div className={styles.inputSearch}>
+          <input
+              type="text"
+              
+              name="filter"
+              value={formState.filter}
+              onChange={handleTasks}
+              placeholder="Faça sua pesquisa"
+            />
+        </div>
+      )}
 
       {filterList.map((comment) => {
         return (
@@ -131,6 +132,7 @@ export function ListContent() {
           </div>
         );
       })}
+
       {newTasksComents.length === 0 && (
         <MessagemTarefas
           image={Clipboard}
